@@ -32,7 +32,7 @@ APP_CHECKOUT_DIR=$1
 # there is no Meteor app in the root.
 [ ! -d "$APP_CHECKOUT_DIR/.meteor" ] && APP_CHECKOUT_DIR="$APP_CHECKOUT_DIR/app"
 # Where we will install meteor. Has to be outside the APP_CHECKOUT_DIR.
-METEOR_DIR=`mktemp -d "$BUILDPACK_DIR"/meteor-XXXX`
+METEOR_DIR=`mktemp -d /tmp/meteor-XXXX`
 # Where we'll put things we compile.
 COMPILE_DIR_SUFFIX=".meteor/heroku_build"
 COMPILE_DIR="$APP_CHECKOUT_DIR"/"$COMPILE_DIR_SUFFIX"
@@ -70,7 +70,7 @@ cd $APP_CHECKOUT_DIR
 
 # Now on to bundling. Don't put the bundle in $APP_CHECKOUT_DIR, or it will
 # recurse, trying to bundle up its own bundling.
-BUNDLE_DEST=`mktemp -d "$BUILDPACK_DIR/build-XXXX"`
+BUNDLE_DEST=`mktemp -d /tmp/build-XXXX`
 # <hack issue='https://github.com/meteor/meteor/issues/2867'>
 # Temporary hack to address meteor failing to bundle if mobile targets are
 # included but server URL is not (issue #2).  Remove mobile targets. This
